@@ -54,7 +54,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Panorama180View\Panorama180View\Scripts\Panorama180View.cs" />
-     <None Include="Assets\Panorama180View\Panorama180View\Shaders\panoramaSphereRendering.shader" />
+     <None Include="Assets\Panorama180View\Panorama180View\Resources\Shaders\panoramaSphereRendering.shader" />
      <None Include="Assets\Panorama180View\README.txt" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>C:/Users/y_yut/Documents/Unity/Panorama180View/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>

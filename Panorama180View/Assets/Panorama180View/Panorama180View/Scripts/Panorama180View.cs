@@ -50,7 +50,6 @@ namespace Panorama180View {
             m_CreateVideoPlayer();
         }
 
-        // Update is called once per frame
         void Update () {
             // 背景テクスチャを指定.
             m_SetBackgroundTexture();
@@ -82,12 +81,13 @@ namespace Panorama180View {
          */
         private void m_CreateBackgroundSphere () {
             if (m_backgroundSphereMat == null) {
-                string shaderPath = "Hidden/Panorama180View/panoramaSphereRendering";
-                Shader shader = Shader.Find(shaderPath);
+                // 以下、ビルドして実行する時にShaderを読み込めるように
+                // Shader.FindではなくResources.Load<Shader>を使用している.
+                Shader shader = Resources.Load<Shader>("Shaders/panoramaSphereRendering");
                 m_backgroundSphereMat = new Material(shader);
             }
             if (m_backgroundSphere == null) {
-                Mesh mesh = Resources.Load<Mesh>("objects/backgroundSphere_vr360");
+                Mesh mesh = Resources.Load<Mesh>("Objects/backgroundSphere_vr360");
                 m_backgroundSphere = new GameObject("panorama360Sphere");
 
                 MeshRenderer meshRenderer = m_backgroundSphere.AddComponent<MeshRenderer>();
