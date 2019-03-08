@@ -1,6 +1,6 @@
 # Unity_Panorama180View
 
-[To Japanese document](README_jp.md)
+[To Japanese document](README_jp.md)    
 
 A sample project for viewing still image of Equirectangular 180 degrees Side By Side or VR180 video of fisheye as VR on Unity.    
 For VR180 still image, please convert them to 2 eyes layout in advance with "VR180 Creator" (https://vr.google.com/vr180/apps/).    
