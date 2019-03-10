@@ -98,8 +98,8 @@ namespace Panorama180View {
                 meshFilter.mesh = mesh;
 
                 m_backgroundSphere.transform.localScale = new Vector3(radius, radius, radius);
-                m_backgroundSphere.transform.position = new Vector3(0, 0, 0);
-
+                m_backgroundSphere.transform.position = this.transform.position;
+ 
                 // Y軸中心の回転角度.
                 Quaternion currentCameraRot = this.transform.rotation;
                 float cRotY = currentCameraRot.eulerAngles.y;
