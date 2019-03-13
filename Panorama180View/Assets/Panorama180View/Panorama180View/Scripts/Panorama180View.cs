@@ -1,5 +1,9 @@
 ﻿#pragma warning disable 0414
 
+/**
+ * Panorama180View.Panorama180View
+ * Equirectangular180のVR表示を行う.
+ */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -258,7 +262,7 @@ namespace Panorama180View {
         /**
          * バージョン.
          */
-        public int GetVersion () { return 0x100; }
+        public int GetVersion () { return 0x101; }
 
         /**
          * 状態遷移の変更.

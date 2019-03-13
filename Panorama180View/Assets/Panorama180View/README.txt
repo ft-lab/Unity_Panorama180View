@@ -36,3 +36,13 @@ Please turn on "Virtual Reality Supported" in "XR Settings" of "Project Settings
    Radius         : 背景球の半径
    Intensity      : 明るさ
 
+[ Change Log ] ----------------
+
+[03/13/2019]
+
+- Added methods of state transition with panorama180 still image.
+- Added sample scene "StateTransition".
+
+[03/08/2019]
+
+- first version
