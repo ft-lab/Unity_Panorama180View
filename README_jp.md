@@ -8,7 +8,7 @@ Equirectangular180のSide By Sideの静止画や
 
 ## 開発環境
 
-Unity 2018.3.7 (Windows)     
+Unity 2018.3.8 (Windows)     
 
 ## フォルダ構成
 
@@ -20,8 +20,11 @@ Unity 2018.3.7 (Windows)
             [Shaders]
           [Scripts]
       [Images]             サンプル画像
+      [Scripts]            サンプルで使用するスクリプト      
       [Scenes]
         SampleScene        サンプルシーン    
+        StateTransition    状態遷移のサンプルシーン
+
 
 ## 使い方
 
@@ -59,3 +62,73 @@ Unity 2018.3.7 (Windows)
 左右に左目/右目の魚眼180度画像を配置。    
 ![img03](images/background_vr180_type_03.jpg)    
 
+## サンプルシーン
+
+| シーン名 | 説明 |
+| :--- | :--- |
+| SampleScene | パノラマ180静止画を表示するだけのもの |
+| StateTransition | スクリプトを使用して、フェードイン、2枚の画像の遷移を行う |
+
+## Panorama180View.Panorama180Viewの外部メソッド
+
+Panorama180View.Panorama180Viewのpublicなメソッドを使用することで、
+スクリプトでパノラマ180の状態遷移を制御することができます。     
+使い方は、"Assets/Scripts/StateTransition.cs"を参照してください。    
+
+### バージョンを取得
+
+     int GetVersion ();     
+
+バージョンを取得。
+
+### 状態遷移の変更
+
+     void SetStateTransition (StateTransitionType type);
+
+StateTransitionType.Noneで状態遷移しません。    
+StateTransitionType.FadeInでフェードインします。   
+StateTransitionType.FadeOutでフェードアウトします。   
+StateTransitionType.Blendで2枚のテクスチャを合成します。   
+このメソッドが呼ばれると、指定された状態に移行します。    
+なお、遷移中は値を変更できません。     
+
+### 遷移元のテクスチャの変更
+
+    void SetSrcTexture (Texture2D tex);    
+
+遷移元のテクスチャを指定します。    
+
+### 遷移先のテクスチャの変更
+
+    void SetDestTexture (Texture2D tex);    
+
+遷移先のテクスチャを指定します。    
+"SetStateTransition(Panorama180View.Panorama180View.StateTransitionType.Blend);"の場合に、    
+SetSrcTextureで指定したテクスチャからSetDestTextureで指定したテクスチャに遷移します。    
+
+### フェードインの色を変更
+
+    void SetFadeInColor (Color col);    
+フェードインする場合の開始色を指定します。     
+
+### フェードアウトの色を変更
+
+    void SetFadeOutColor (Color col);    
+フェードアウトする場合の終了色を指定します。     
+
+### 状態遷移の間隔（秒）を指定
+
+    void SetTransitionInterval (float interval);    
+遷移させるときの時間を秒単位で指定します。    
+
+
+## 更新履歴
+
+### [03/13/2019]
+
+- 静止画のパノラマ180で、状態遷移を行うメソッドを追加    
+- "StateTransition"のサンプルシーンを追加    
+
+### [03/08/2019]
+
+- 最初のバージョン

@@ -7,7 +7,7 @@ For VR180 still image, please convert them to 2 eyes layout in advance with "VR1
 
 ## Development environment
 
-Unity 2018.3.7 (Windows)     
+Unity 2018.3.8 (Windows)     
 
 ## Folder structure
 
@@ -19,8 +19,10 @@ Unity 2018.3.7 (Windows)
             [Shaders]
           [Scripts]
       [Images]             sample image
+      [Scripts]            Scripts used in sample      
       [Scenes]
         SampleScene        sample scene    
+        StateTransition    Sample scene of state transition
 
 ## How to use
 
@@ -57,4 +59,73 @@ Place left eye / right eye equirectangular 180 degrees image on the left and rig
 
 Place left eye / right eye fish eye 180 degrees image on the left and right.    
 ![img03](images/background_vr180_type_03.jpg)    
+
+## Sample Scenes
+
+| Scene name | Description |
+| :--- | :--- |
+| SampleScene | One that only displays panorama180 still image |
+| StateTransition | Use a script to fade in and transition between two images |
+
+## External method of Panorama180View.Panorama180View
+
+By using the public method of Panorama180View.Panorama180View, script can control the state transition of panorama180.     
+Please refer to "Assets/Scripts/StateTransition.cs" for usage.    
+
+### Get version
+
+     int GetVersion ();     
+
+Get version.
+
+### Change state transition 
+
+     void SetStateTransition (StateTransitionType type);
+
+Does not transition state with StateTransitionType.None.    
+Fade in with StateTransitionType.FadeIn.   
+Fade out with StateTransitionType.FadeOut.   
+Blend two textures with StateTransitionType.Blend.   
+When this method is called, it will transition to the specified state.    
+Note that you can not change the value during transition.     
+
+### Change transition source texture
+
+    void SetSrcTexture (Texture2D tex);    
+
+Specifies the texture of the transition source.    
+
+### Change transition destination texture
+
+    void SetDestTexture (Texture2D tex);    
+
+Specifies the texture of the transition destination.    
+In the case of "SetStateTransition(Panorama180View.Panorama180View.StateTransitionType.Blend);", transition from the texture specified in SetSrcTexture to the texture specified in SetDestTexture.    
+
+
+### Change fade in color
+
+    void SetFadeInColor (Color col);    
+Specify the start color for fading in.     
+
+### Change fade out color
+
+    void SetFadeOutColor (Color col);    
+Specify the end color for fading out.     
+
+### Specify the state transition interval (seconds)
+
+    void SetTransitionInterval (float interval);    
+Specify the transition time in seconds.    
+
+## Change log
+
+### [03/13/2019]
+
+- Added methods of state transition with panorama180 still image.    
+- Added sample scene "StateTransition".    
+
+### [03/08/2019]
+
+- First verion
 
