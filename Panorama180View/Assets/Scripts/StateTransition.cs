@@ -35,7 +35,7 @@ namespace Panorama180ViewDemo {
         }
 
         void Update () {
-            if (Time.time > 5.0f && Time.time < 10.0f) {
+            if (Time.time > 20.0f && Time.time < 30.0f) {
                 if (m_state == 0) {
                     m_state = 1;
 
@@ -45,7 +45,7 @@ namespace Panorama180ViewDemo {
                     m_panorama180View.SetStateTransition(Panorama180View.Panorama180View.StateTransitionType.Blend);
                 }
 
-            } else if (Time.time > 10.0f) {
+            } else if (Time.time > 30.0f) {
                 if (m_state == 1) {
                     m_state = 2;
                     m_panorama180View.SetSrcTexture(destImage);
