@@ -27,6 +27,17 @@ namespace Panorama180View {
             FishEye180SideBySide
         }
 
+        /**
+         * 状態遷移の種類.
+         */
+        public enum StateTransitionType {
+            None,           // 状態遷移なし.
+            FadeIn,         // フェードイン (フェードイン色 ==> image).
+            FadeOut,         // フェードアウト (image ==> フェードアウト色).
+            Blend,           // 静止画合成 (image ==> destinationImage).
+
+        }
+
         [SerializeField] BackgroundType fileType = BackgroundType.Image;        // 背景の種類.
         [SerializeField] Texture2D image = null;                                 // 背景画像のパノラマ.
         [SerializeField] VideoClip video = null;                                 // 背景動画のパノラマ.
@@ -42,6 +53,18 @@ namespace Panorama180View {
         private GameObject m_audioSource = null;        // Audioの発生源. 
         private RenderTexture m_renderTexture = null;   // 1フレームのキャプチャ用.
 
+        //-------------------------------------------------.
+        // 以下、静止画の状態遷移用.
+        //-------------------------------------------------.
+        private StateTransitionType m_stateTransitionType = StateTransitionType.None;   // 状態遷移の種類.
+        private Texture2D m_destinationImage;            // 状態遷移時の静止画像.
+        private Color m_fadeInColor = Color.black;       // フェイドインの色.
+        private Color m_fadeOutColor = Color.white;      // フェイドアウトの色.
+        private float m_transitionStartTime = 0.0f;         // 状態遷移の開始時間.
+        private float m_transitionInterval = 1.0f;           // 状態遷移の時間間隔.
+        private bool m_inTransition = false;             // 遷移中の場合true.
+
+        //-------------------------------------------------.
         void Start () {
             // 背景球を作成.
             m_CreateBackgroundSphere();
@@ -51,8 +74,10 @@ namespace Panorama180View {
         }
 
         void Update () {
-            // 背景テクスチャを指定.
-            m_SetBackgroundTexture();
+            if (!m_UpdateTransition()) {        // 状態遷移させる.
+                // 背景テクスチャを指定.
+                m_SetBackgroundTexture();
+            }
         }
 
         void OnDestroy () {
@@ -150,6 +175,7 @@ namespace Panorama180View {
                 m_backgroundSphereMat.SetTexture("_MainTex", image);
                 m_backgroundSphereMat.SetFloat("_Intensity", intensity);
                 m_backgroundSphereMat.SetInt("_Mode", (int)projectonType);
+                m_backgroundSphereMat.SetInt("_TransitionType", 0);
 
             } else {
                 // VideoClipのパラメータを渡す.
@@ -188,10 +214,101 @@ namespace Panorama180View {
                         m_backgroundSphereMat.SetTexture("_MainTex", m_renderTexture);
                         m_backgroundSphereMat.SetFloat("_Intensity", intensity);
                         m_backgroundSphereMat.SetInt("_Mode", (int)projectonType);
+                        m_backgroundSphereMat.SetInt("_TransitionType", 0);
                     }
                 }
             }
         }
+
+        //-----------------------------------------------------------------.
+        // 静止画の場合の状態遷移用.
+        //-----------------------------------------------------------------.
+        /**
+         * 状態遷移。Updateごとに呼ばれる.
+         */
+        private bool m_UpdateTransition () {
+            if (m_stateTransitionType == StateTransitionType.None) return false;
+            if (fileType != BackgroundType.Image) return false;
+
+            float passTime = Time.time - m_transitionStartTime;
+            m_inTransition = (passTime < m_transitionInterval);
+            float tPos = passTime / m_transitionInterval;
+            tPos = Mathf.Clamp(tPos, 0.0f, 1.0f);
+
+            m_backgroundSphere.SetActive(image != null);
+            m_videoG.SetActive(false);
+            m_audioSource.SetActive(false);
+
+            m_backgroundSphereMat.SetTexture("_MainTex", image);
+            m_backgroundSphereMat.SetFloat("_Intensity", intensity);
+            m_backgroundSphereMat.SetInt("_Mode", (int)projectonType);
+
+            m_backgroundSphereMat.SetInt("_TransitionType", (int)m_stateTransitionType);     // 状態遷移させるモード.
+            m_backgroundSphereMat.SetTexture("_DestTex", m_destinationImage);
+            m_backgroundSphereMat.SetFloat("_TPos", tPos);
+            m_backgroundSphereMat.SetVector("_FadeInColor", new Vector4(m_fadeInColor.r, m_fadeInColor.g, m_fadeInColor.b, 1.0f));
+            m_backgroundSphereMat.SetVector("_FadeOutColor", new Vector4(m_fadeOutColor.r, m_fadeOutColor.g, m_fadeOutColor.b, 1.0f));
+
+            return true;
+        }
+
+        //-----------------------------------------------------------------.
+        // 外部からアクセス.
+        //-----------------------------------------------------------------.
+        /**
+         * バージョン.
+         */
+        public int GetVersion () { return 0x100; }
+
+        /**
+         * 状態遷移の変更.
+         */
+        public void SetStateTransition (StateTransitionType type) {
+            if (m_inTransition) return;
+            m_stateTransitionType = type;
+            m_transitionStartTime = Time.time;
+        }
+
+        /**
+         * Textureの変更.
+         */
+        public void SetSrcTexture (Texture2D tex) {
+            if (m_inTransition) return;
+            image = tex;
+        }
+
+        /**
+         * 遷移先のTextureの変更.
+         */
+        public void SetDestTexture (Texture2D tex) {
+            if (m_inTransition) return;
+            m_destinationImage = tex;
+        }
+
+        /**
+         * フェードインの色を指定.
+         */
+        public void SetFadeInColor (Color col) {
+            if (m_inTransition) return;
+            m_fadeInColor = col;
+        }
+
+        /**
+         * フェードアウトの色を指定.
+         */
+        public void SetFadeOutColor (Color col) {
+            if (m_inTransition) return;
+            m_fadeOutColor = col;
+        }
+
+        /**
+         * 状態遷移の間隔（秒）を指定.
+         */
+        public void SetTransitionInterval (float interval) {
+            if (m_inTransition) return;
+            m_transitionInterval = interval;
+        }
+
     }
 }
 
