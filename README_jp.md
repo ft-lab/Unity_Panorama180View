@@ -131,6 +131,8 @@ SetSrcTextureで指定したテクスチャからSetDestTextureで指定した�
 ![img01](images/p180view_img_01.jpg)    
 「Max Size」で、2の累乗のサイズを指定できます（最大8192）。    
 もしオリジナルの画像サイズが2の累乗でないときに、オリジナル画像サイズを保ちたい場合は「Non-Power of 2」で「None」を選択します。    
+また、「Compression」がNormal Qualityの場合はモアレが発生する場合があります。    
+このときは「High Quality」を選択するようにします。    
 値を変更した場合は「Apply」ボタンを押すと確定になります。    
 
 ## 動画のパラメータ
@@ -138,11 +140,12 @@ SetSrcTextureで指定したテクスチャからSetDestTextureで指定した�
 動画はmp4ファイルをプロジェクトに読み込みます。    
 ![img02](images/p180view_img_02.jpg)    
 動画が4Kのように大きなサイズのとき、デフォルトの状態では再生が安定しない場合が多いです。     
-このときのInsopectorウィンドウで、「Transcode」チェックボックスをOnにし、    
+このときのInspectorウィンドウで、「Transcode」チェックボックスをOnにし、    
 「Bitrate Mode」と「Spatial Quality」をMediumにすると品質は劣化しますが、再生は安定しやすくなります。    
 また、Unity 2019の場合は「H.265」のCodecを選択できます。   
 H.265のほうがH.264よりも1フレームの転送効率（Bitrate）がいいです。    
 また、ファイルサイズも小さくできるため、動画ファイルは可能な限りH.265にしたほうがいいかもしれません。    
+
 動画ファイルはffmpeg( https://ffmpeg.org/ )を使用することで、様々なフォーマットやオプションを指定した変換を行うことができます。    
 
 ## 更新履歴

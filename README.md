@@ -1,4 +1,5 @@
 # Unity_Panorama180View
+Translated with Google Translate.    
 
 [To Japanese document](README_jp.md)    
 
@@ -118,7 +119,38 @@ Specify the end color for fading out.
     void SetTransitionInterval (float interval);    
 Specify the transition time in seconds.    
 
+## Still image parameter
+
+When importing a still image into a project, it is resized to a width of up to 2048 pixels by default.    
+When displaying in VR using 180-degree panoramic images, resolution is coarse at 2048 pixels.    
+This parameter may require at least 4096 pixels when used in VR.    
+Change the parameters of this still image.    
+Select the target image and display the Inspector window.     
+![img01](images/p180view_img_01.jpg)    
+"Max Size" can specify the size of power of 2 (up to 8192).    
+If the original image size is not a power of 2, select "None" in "Non-Power of 2" to specify the original image size.    
+In addition, moiré may occur when "Compression" is Normal Quality.    
+In this case, select "High Quality".    
+After changing the value, press the "Apply" button to confirm.    
+
+## Video parameter
+
+The video imports the mp4 file into the project.   
+![img02](images/p180view_img_02.jpg)    
+When the video is as large as 4K, the default condition is often that the playback is not stable.     
+If the "Transcode" check box is turned on in the Inspector window and "Bitrate Mode" and "Spatial Quality" are Medium,    
+the quality will be degraded, but playback will be more stable.    
+Also, in case of Unity 2019, Codec of "H.265" can be specified.
+H.265 is better with Bitrate at 1 frame than H.264.    
+Also, as the file size can be reduced, it may be better to make the video file H.265 as much as possible.    
+
+Video files can be converted using various formats and options by using ffmpeg ( https://ffmpeg.org/ ).    
+
 ## Change log
+
+### [05/02/2019]
+
+- Added description of "Still image parameter" and "Video parameter"    
 
 ### [03/13/2019]
 
