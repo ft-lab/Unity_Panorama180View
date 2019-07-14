@@ -9,6 +9,7 @@ Equirectangular180のSide By Sideの静止画や
 ## 開発環境
 
 Unity 2018.3.8 (Windows)     
+→ Unity 2019.1.9f1 (Windows)に更新。     
 
 ## フォルダ構成
 
@@ -20,6 +21,7 @@ Unity 2018.3.8 (Windows)
             [Shaders]
           [Scripts]
       [Images]             サンプル画像
+      [videos]             サンプル動画 (H.265)
       [Scripts]            サンプルで使用するスクリプト      
       [Scenes]
         SampleScene        サンプルシーン    
@@ -133,6 +135,7 @@ SetSrcTextureで指定したテクスチャからSetDestTextureで指定した�
 もしオリジナルの画像サイズが2の累乗でないときに、オリジナル画像サイズを保ちたい場合は「Non-Power of 2」で「None」を選択します。    
 また、「Compression」がNormal Qualityの場合はモアレが発生する場合があります。    
 このときは「High Quality」を選択するようにします。    
+とくに、Unity 2019でNormal Qualityの場合は品質がよくない場合が多いかもしれません。    
 値を変更した場合は「Apply」ボタンを押すと確定になります。    
 
 ## 動画のパラメータ
@@ -149,6 +152,12 @@ H.265のほうがH.264よりも1フレームの転送効率（Bitrate）がい�
 動画ファイルはffmpeg( https://ffmpeg.org/ )を使用することで、様々なフォーマットやオプションを指定した変換を行うことができます。    
 
 ## 更新履歴
+
+### [07/14/2019]
+
+- Unity 2019.1.9f1で動作チェック
+- テクスチャの圧縮を "Normal Quality"から"High Quality"に変更
+- H.265のFish Eyeのサンプル動画を追加
 
 ### [05/02/2019]
 

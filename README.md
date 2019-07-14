@@ -9,6 +9,7 @@ For VR180 still image, please convert them to 2 eyes layout in advance with "VR1
 ## Development environment
 
 Unity 2018.3.8 (Windows)     
+Updated to Unity 2019.1.9f1 (Windows)     
 
 ## Folder structure
 
@@ -20,6 +21,7 @@ Unity 2018.3.8 (Windows)
             [Shaders]
           [Scripts]
       [Images]             sample image
+      [videos]             sample video (H.265)
       [Scripts]            Scripts used in sample      
       [Scenes]
         SampleScene        sample scene    
@@ -131,6 +133,7 @@ Select the target image and display the Inspector window.
 If the original image size is not a power of 2, select "None" in "Non-Power of 2" to specify the original image size.    
 In addition, moiré may occur when "Compression" is Normal Quality.    
 In this case, select "High Quality".    
+In particular, the quality may not be good with Normal Quality on Unity 2019.    
 After changing the value, press the "Apply" button to confirm.    
 
 ## Video parameter
@@ -147,6 +150,12 @@ Also, as the file size can be reduced, it may be better to make the video file H
 Video files can be converted using various formats and options by using ffmpeg ( https://ffmpeg.org/ ).    
 
 ## Change log
+
+### [07/14/2019]
+
+- Operation check with Unity 2019.1.9f1.
+- Change "Texture compression" from Normal Quality to High Quality.
+- Add H.265 Fish Eye Sample Video
 
 ### [05/02/2019]
 
