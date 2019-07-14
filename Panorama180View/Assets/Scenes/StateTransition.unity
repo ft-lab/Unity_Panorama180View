@@ -223,6 +223,7 @@ GameObject:
   - component: {fileID: 1031022658}
   - component: {fileID: 1031022657}
   - component: {fileID: 1031022660}
+  - component: {fileID: 1031022661}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -307,12 +308,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5be50d4c78681f94fa7eee0386219792, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fileType: 1
-  image: {fileID: 0}
-  video: {fileID: 32900000, guid: 87728808631427540b098719a91f64fc, type: 3}
-  projectonType: 2
+  fileType: 0
+  image: {fileID: 2800000, guid: fa9a23959594fa74cb718f0f55ced201, type: 3}
+  video: {fileID: 0}
+  projectonType: 1
   radius: 500
   intensity: 1
+--- !u!114 &1031022661
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1031022656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c1cf0aa2c3663a48a56b3645c2e14c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sourceImage: {fileID: 2800000, guid: fa9a23959594fa74cb718f0f55ced201, type: 3}
+  destImage: {fileID: 2800000, guid: 09a77ce076c13434288bdb1e9e15e387, type: 3}
 --- !u!1 &1411940166
 GameObject:
   m_ObjectHideFlags: 0
